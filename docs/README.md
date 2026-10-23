@@ -11,3 +11,5 @@ User navigates to website
         * Has lexic account
         * Does not have lexic account
 
+User installs lexic via their Command-Line Interface
+

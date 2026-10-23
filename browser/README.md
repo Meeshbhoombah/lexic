@@ -7,4 +7,8 @@ Browser client
 #### Development
 ##### Prerequisites
 ###### Bun
+### Working on `lexic/browser`
+```
+bun --bun run dev
+```
 

@@ -1,2 +1,83 @@
+# Vim
 *.sw*
-/target
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Next.js
+.next/
+**/.next/
+out/
+**/out/
+
+# Build output
+dist/
+**/dist/
+build/
+**/build/
+
+# Bun
+bun-debug.log*
+bun-error.log*
+*.bun
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.*.sample
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Coverage and test artifacts
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# Tool caches
+.turbo/
+.cache/
+.eslintcache
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# Local certificates and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Local databases and application data
+*.sqlite
+*.sqlite3
+*.db
+data/
+storage/
+
+# Rust (future node)
+target/
+**/target/
+
+# Local development overrides
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

@@ -2,6 +2,9 @@
 Browser client
 
 ## Getting Started
-### Building
-### Development
+### Installation
+#### Production
+#### Development
+##### Prerequisites
+###### Bun
 

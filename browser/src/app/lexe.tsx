@@ -8,6 +8,8 @@ import {
   HkdfSha256,
 } from "@hpke/core";
 import { Chacha20Poly1305 } from "@hpke/chacha20poly1305";
+import AccountCreation from "./account-creation";
+
 
 const CONNECT_URL = "https://lexe.app/connect";
 const MAILBOX_URL = "https://lexe.app/mailbox";
@@ -77,20 +79,6 @@ function wait(milliseconds: number): Promise<void> {
   return new Promise((resolve) => {
     setTimeout(resolve, milliseconds);
   });
-}
-
-function getDownloadUrl(): string {
-  const userAgent = navigator.userAgent;
-
-  if (/android/i.test(userAgent)) {
-    return "https://play.google.com/store/search?q=Lexe%20wallet&c=apps";
-  }
-
-  if (/iphone|ipad|ipod/i.test(userAgent)) {
-    return "https://apps.apple.com/us/search?term=Lexe%20wallet";
-  }
-
-  return "https://docs.lexe.tech/";
 }
 
 export default function LexeConnect() {
@@ -427,11 +415,6 @@ export default function LexeConnect() {
     };
   }, [refreshKey]);
 
-  function createAccount(): void {
-    logEvent("account.download_clicked");
-    window.location.assign(getDownloadUrl());
-  }
-
   return (
     <main className="flex min-h-screen items-center justify-center bg-neutral-50 px-5 py-12 text-neutral-950">
       <div className="w-full max-w-md">
@@ -513,26 +496,11 @@ export default function LexeConnect() {
             </button>
           )}
 
-          <div className="my-6 flex items-center gap-3">
-            <div className="h-px flex-1 bg-neutral-200" />
-            <span className="text-xs text-neutral-400">
-              NEW TO LEXE?
-            </span>
-            <div className="h-px flex-1 bg-neutral-200" />
-          </div>
+          <AccountCreation
+            credential={credential}
+            connected={status === "connected"}
+          />
 
-          <button
-            type="button"
-            onClick={createAccount}
-            className="w-full rounded-lg bg-neutral-950 px-4 py-3 text-sm font-medium text-white transition hover:bg-neutral-800"
-          >
-            Create an Account
-          </button>
-
-          <p className="mt-3 text-center text-xs leading-5 text-neutral-500">
-            You will be directed to Lexe&apos;s getting-started page
-            or an app-store search.
-          </p>
         </section>
 
         <footer className="mt-6 text-center text-xs leading-5 text-neutral-500">

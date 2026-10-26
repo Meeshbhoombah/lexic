@@ -14,6 +14,23 @@ lexic is available at:
 ### Development
 #### Prequisites
 #### Installation
+Create a development database. First, activate the `psql` console.
+```
+psql -d postgres
+```
+
+Then, at the PostgreSQL prompt, execute:
+```
+CREATE ROLE lexic WITH LOGIN PASSWORD 'local-development-only';
+
+CREATE DATABASE lexic OWNER lexic;
+```
+
+Exit the prompt:
+```
+\q
+```
+
 #### Building
 Start a local development instance of Postgres.
 ```

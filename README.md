@@ -14,6 +14,14 @@ lexic is available at:
 ### Development
 #### Prequisites
 #### Installation
+Clone this repository.
+```
+```
+
+Navigate into the directory.
+```
+```
+
 Create a development database. First, activate the `psql` console.
 ```
 psql -d postgres
@@ -22,7 +30,6 @@ psql -d postgres
 Then, at the PostgreSQL prompt, execute:
 ```
 CREATE ROLE lexic WITH LOGIN PASSWORD 'local-development-only';
-
 CREATE DATABASE lexic OWNER lexic;
 ```
 

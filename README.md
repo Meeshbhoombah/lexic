@@ -1,5 +1,5 @@
-# lexic
-A decentralized messaging client
+# Lexic
+Decentralized Messaging
 
 ## Getting Started
 <!--
@@ -15,12 +15,20 @@ lexic is available at:
 
 ### Development
 #### Prequisites
+##### Homebrew
+##### PostgreSQL
+##### Bun
+
 #### Installation
-Clone this repository.
+Fork lexic.
 ```
 ```
 
-Navigate into the directory.
+Clone your fork.
+```
+```
+
+Navigate into your cloned fork of lexic.
 ```
 ```
 
@@ -38,6 +46,11 @@ CREATE DATABASE lexic OWNER lexic;
 Exit the prompt:
 ```
 \q
+```
+
+Duplicate `.env.example` as your local `.env` file.
+```
+cp .env.example .env
 ```
 
 #### Building

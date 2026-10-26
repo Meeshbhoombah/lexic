@@ -1,6 +1,10 @@
 # Lexic
 Decentralized Messaging
 
+## TODO
+- [ ] Fix server failing silently if:
+    + PostgreSQL is not running
+
 ## Getting Started
 <!--
 lexic is available at:
@@ -48,7 +52,10 @@ cargo build
 cd browser
 ```
 
-6. Write
+6. Install the browser client's dependencies.
+```
+bun install
+```
 
 7. Create a development database. First, activate the `psql` console.
 ```

@@ -31,7 +31,8 @@ detailing how to start developing Lexic on Windows/Linux are welcome.
 ```
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 ```
-This source code is the primary implementation of Lexic (written in Rust).
+The source code that contains this README  is the primary implementation of 
+Lexic (written in Rust).
 
 ##### Cargo Watch
 "Cargo Watch watches over your project's source for changes, and runs Cargo 
@@ -44,6 +45,7 @@ the server as changes are made to the source code.
 cd ~
 ```
 
+Then,
 ```
 cargo install cargo-watch
 ```

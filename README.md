@@ -27,11 +27,27 @@ detailing how to start developing Lexic on Windows/Linux are welcome.
 ##### Homebrew
 ##### PostgreSQL
 ##### Rust
+"A language empowering everyone to build reliable and efficient software."
+```
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+This source code is the primary implementation of Lexic (written in Rust).
+
 ##### Cargo Watch
-Cargo Watch watches over your project's source for changes, and runs Cargo 
-commands when they occur.
+"Cargo Watch watches over your project's source for changes, and runs Cargo 
+commands when they occur."
+
+Navigate to your $ROOT directory. `cargo` `watch` needs to be installed 
+as the SSOT development insturctions leverage `cargo` watch for live-reloading
+the server as changes are made to the source code.
 ```
+cd ~
 ```
+
+```
+cargo install cargo-watch
+```
+Lexic uses `cargo` `watch` to run the Node in development via `cargo` `run`.
 
 ##### Bun
 

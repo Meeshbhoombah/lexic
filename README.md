@@ -15,6 +15,10 @@ lexic is available at:
 #### Prequisites
 #### Installation
 #### Building
+Start a local development instance of Postgres.
+```
+brew services start postgresql
+```
 
 ### Contributing
 

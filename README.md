@@ -30,7 +30,8 @@ are welcome.
 ##### Bun
 
 #### Installation
-1. Fork lexic. At the top of the page on GitHub, look for the "Fork" button.
+1. Fork lexic. At the top of the page on GitHub, look for the "Fork" button. 
+Click it to create your editable extension of Lexic's source code.
 
 2. Clone your fork.
 ```

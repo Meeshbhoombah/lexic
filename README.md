@@ -30,16 +30,15 @@ are welcome.
 ##### Bun
 
 #### Installation
-1. Fork lexic.
-```
-```
+1. Fork lexic. At the top of the page on GitHub, look for the "Fork" button.
 
 2. Clone your fork.
 ```
 ```
 
-3. Navigate into your cloned fork of lexic.
+3. Navigate into your cloned fork of Lexic.
 ```
+cd lexic
 ```
 
 4. Build Lexic.

@@ -20,13 +20,19 @@ lexic is available at:
 ### Development
 #### Prequisites
 ##### MacOS
-These instructions are written for MacOS. Lexic was built on Apple's Unix 
-system. Instructions for Windows and Linux have not been considered, 
-contributions detailing how to start developing Lexic on Windows/Linux
-are welcome.
+These instructions are written for MacOS. Lexic was built on Apple's Unix. 
+Instructions for Windows and Linux have not been considered, contributions 
+detailing how to start developing Lexic on Windows/Linux are welcome.
 
 ##### Homebrew
 ##### PostgreSQL
+##### Rust
+##### Cargo Watch
+Cargo Watch watches over your project's source for changes, and runs Cargo 
+commands when they occur.
+```
+```
+
 ##### Bun
 
 #### Installation
@@ -35,6 +41,7 @@ Click it to create your editable extension of Lexic's source code.
 
 2. Clone your fork.
 ```
+git clone <YOUR_FORK_URI>
 ```
 
 3. Navigate into your cloned fork of Lexic.

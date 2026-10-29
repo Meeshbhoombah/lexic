@@ -14,45 +14,55 @@ type State =
   | { kind: "ready"; session: Session }
   | { kind: "error"; message: string };
 
+let sessionBootstrapPromise: Promise<Session> | null = null;
+
+function getSession(): Promise<Session> {
+  if (!sessionBootstrapPromise) {
+    sessionBootstrapPromise = (async () => {
+      const response = await fetch("/api/session", {
+        method: "POST",
+        cache: "no-store",
+      });
+
+      const body: unknown = await response.json();
+
+      if (!response.ok) {
+        throw new Error("Unable to create your Lexic session.");
+      }
+
+      if (
+        typeof body !== "object" ||
+        body === null ||
+        !("account_id" in body) ||
+        typeof body.account_id !== "string" ||
+        !("status" in body) ||
+        typeof body.status !== "string" ||
+        !("account_created_at" in body) ||
+        typeof body.account_created_at !== "string" ||
+        !("expires_at" in body) ||
+        typeof body.expires_at !== "string"
+      ) {
+        throw new Error("Invalid session response.");
+      }
+
+      return body as Session;
+    })();
+  }
+
+  return sessionBootstrapPromise;
+}
+
 export default function SessionBootstrap() {
   const [state, setState] = useState<State>({
     kind: "loading",
   });
 
   useEffect(() => {
-    async function establishSession() {
-      try {
-        const response = await fetch("/api/session", {
-          method: "POST",
-          cache: "no-store",
-        });
-
-        const body: unknown = await response.json();
-
-        if (!response.ok) {
-          throw new Error("Unable to create your Lexic session.");
-        }
-
-        if (
-          typeof body !== "object" ||
-          body === null ||
-          !("account_id" in body) ||
-          typeof body.account_id !== "string" ||
-          !("status" in body) ||
-          typeof body.status !== "string" ||
-          !("account_created_at" in body) ||
-          typeof body.account_created_at !== "string" ||
-          !("expires_at" in body) ||
-          typeof body.expires_at !== "string"
-        ) {
-          throw new Error("Invalid session response.");
-        }
-
-        setState({
-          kind: "ready",
-          session: body as Session,
-        });
-      } catch (error) {
+    void getSession()
+      .then((session) => {
+        setState({ kind: "ready", session });
+      })
+      .catch((error: unknown) => {
         setState({
           kind: "error",
           message:
@@ -60,10 +70,7 @@ export default function SessionBootstrap() {
               ? error.message
               : "Unable to create your Lexic session.",
         });
-      }
-    }
-
-    void establishSession();
+      });
   }, []);
 
   return (

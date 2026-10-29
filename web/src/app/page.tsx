@@ -1,6 +1,5 @@
-import LexeConnect from "./lexe"
+import SessionBootstrap from "./session";
 
 export default function Home() {
-  return <LexeConnect />
+  return <SessionBootstrap />;
 }
-

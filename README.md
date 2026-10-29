@@ -72,12 +72,12 @@ cd lexic
 cargo build
 ```
 
-5. Navigate into the browser client's directory.
+5. Navigate into the web client's directory.
 ```
-cd browser
+cd web
 ```
 
-6. Install the browser client's dependencies.
+6. Install the web client's dependencies.
 ```
 bun install
 ```
@@ -103,9 +103,9 @@ CREATE DATABASE lexic OWNER lexic;
 cp .env.example .env
 ```
 
-11. Navigate into the browser client's directory.
+11. Navigate into the web client's directory.
 ```
-cd browser
+cd web
 ```
 
 12. Duplicate `.env.local.example` as your local `.env` file.
@@ -124,12 +124,12 @@ Start the Lexic node.
 cargo watch -x run
 ```
 
-Navigate into the browser client's directory.
+Navigate into the web client's directory.
 ```
-cd browser
+cd web
 ```
 
-Start the browser client development server.
+Start the web client development server.
 ```
 bun --bun run dev
 ```

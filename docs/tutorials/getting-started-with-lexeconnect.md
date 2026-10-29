@@ -488,5 +488,5 @@ Before shipping the integration:
 - [Lexe client credentials](https://docs.lexe.tech/authentication/client-credentials/)
 - [Lexe credential scopes](https://docs.lexe.tech/authentication/credential-scopes/)
 - [Lexe Rust SDK quickstart](https://docs.lexe.tech/rust/quickstart/)
-- [Lexic's browser implementation](https://github.com/Meeshbhoombah/lexic/tree/main/browser/src/app)
+- [Lexic's web client implementation](https://github.com/Meeshbhoombah/lexic/tree/main/web/src/app)
 

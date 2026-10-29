@@ -1,5 +1,5 @@
-# lexic/browser
-Browser client
+# lexic/web
+Web client
 
 ## Getting Started
 ### Installation
@@ -7,7 +7,7 @@ Browser client
 #### Development
 ##### Prerequisites
 ###### Bun
-### Working on `lexic/browser`
+### Working on `lexic/web`
 ```
 bun --bun run dev
 ```

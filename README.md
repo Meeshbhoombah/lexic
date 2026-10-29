@@ -134,5 +134,11 @@ Start the browser client development server.
 bun --bun run dev
 ```
 
+###### File Structure
+Use this `tree` command to view the entire file structure of Lexic.
+```
+tree -a -I '.git|node_modules|target|.next|.turbo|coverage|dist|build|.DS_Store'
+```
+
 ### Contributing
 

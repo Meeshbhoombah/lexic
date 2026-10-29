@@ -46,7 +46,12 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     sqlx::migrate!("./migrations").run(&db).await?;
 
-    let state = AppState { db };
+    let state = AppState { 
+        db,
+        cookie_secure: std::env::var("COOKIE_SECURE")
+            .map(|value| value == "true")
+            .unwrap_or(false),
+    };
 
     let cors = CorsLayer::new()
         .allow_origin("http://localhost:3000".parse::<axum::http::HeaderValue>()?)
@@ -55,6 +60,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let app = Router::new()
         .merge(routes::accounts::router())
+        .merge(routes::sessions::router())
         .route("/health", axum::routing::get(|| async { "ok" }))
         .with_state(state)
         .layer(cors)

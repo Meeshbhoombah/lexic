@@ -121,7 +121,7 @@ brew services start postgresql
 
 Start the Lexic node.
 ```
-cargo watch -x run
+cargo watch -c -x run
 ```
 
 Navigate into the web client's directory.

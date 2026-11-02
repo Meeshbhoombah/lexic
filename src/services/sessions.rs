@@ -3,11 +3,7 @@ use rand::RngCore;
 use sha2::{Digest, Sha256};
 use sqlx::PgPool;
 
-use crate::{
-    errors::AppError,
-    models::session::SessionResponse,
-    repositories,
-};
+use crate::{errors::AppError, models::session::SessionResponse, repositories};
 
 const TOKEN_BYTES: usize = 32;
 
@@ -21,8 +17,7 @@ fn hash_token(token: &str) -> Vec<u8> {
 }
 
 fn is_valid_token(token: &str) -> bool {
-    token.len() == TOKEN_BYTES * 2
-        && token.bytes().all(|byte| byte.is_ascii_hexdigit())
+    token.len() == TOKEN_BYTES * 2 && token.bytes().all(|byte| byte.is_ascii_hexdigit())
 }
 
 fn generate_token() -> String {
@@ -44,9 +39,7 @@ pub async fn establish(
     existing_token: Option<&str>,
 ) -> Result<SessionResult, AppError> {
     if let Some(token) = existing_token.filter(|token| is_valid_token(token)) {
-        if let Some(session) =
-            repositories::sessions::find_active(db, &hash_token(token)).await?
-        {
+        if let Some(session) = repositories::sessions::find_active(db, &hash_token(token)).await? {
             if session.expires_at > Utc::now() {
                 return Ok(SessionResult {
                     session,
@@ -57,8 +50,7 @@ pub async fn establish(
     }
 
     let token = generate_token();
-    let session =
-        repositories::sessions::create(db, &hash_token(&token)).await?;
+    let session = repositories::sessions::create(db, &hash_token(&token)).await?;
 
     Ok(SessionResult { session, token })
 }

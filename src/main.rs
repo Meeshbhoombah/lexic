@@ -46,7 +46,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     sqlx::migrate!("./migrations").run(&db).await?;
 
-    let state = AppState { 
+    let state = AppState {
         db,
         cookie_secure: std::env::var("COOKIE_SECURE")
             .map(|value| value == "true")

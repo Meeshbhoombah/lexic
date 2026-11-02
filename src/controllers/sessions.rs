@@ -25,11 +25,7 @@ pub async fn get_or_create(
     State(state): State<AppState>,
     headers: HeaderMap,
 ) -> Result<Response, AppError> {
-    let result = services::sessions::establish(
-        &state.db,
-        read_cookie(&headers),
-    )
-    .await?;
+    let result = services::sessions::establish(&state.db, read_cookie(&headers)).await?;
 
     let max_age = (result.session.expires_at - chrono::Utc::now())
         .num_seconds()
@@ -52,10 +48,9 @@ pub async fn get_or_create(
     let mut response = Json(result.session).into_response();
 
     response.headers_mut().insert(header::SET_COOKIE, cookie);
-    response.headers_mut().insert(
-        header::CACHE_CONTROL,
-        HeaderValue::from_static("no-store"),
-    );
+    response
+        .headers_mut()
+        .insert(header::CACHE_CONTROL, HeaderValue::from_static("no-store"));
 
     Ok(response)
 }

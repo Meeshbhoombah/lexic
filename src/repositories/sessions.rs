@@ -44,10 +44,7 @@ pub async fn find_active(
     }))
 }
 
-pub async fn create(
-    db: &PgPool,
-    token_hash: &[u8],
-) -> Result<SessionResponse, AppError> {
+pub async fn create(db: &PgPool, token_hash: &[u8]) -> Result<SessionResponse, AppError> {
     let mut tx = db.begin().await.map_err(|error| {
         tracing::error!(error = %error, "Failed to begin session transaction");
         AppError::Internal

@@ -1,10 +1,7 @@
 use sqlx::{PgPool, Postgres, Transaction};
 use uuid::Uuid;
 
-use crate::models::conversation::{
-    ConversationParticipant,
-    ConversationSummary,
-};
+use crate::models::conversation::{ConversationParticipant, ConversationSummary};
 
 async fn add_participant(
     transaction: &mut Transaction<'_, Postgres>,
@@ -89,21 +86,9 @@ pub async fn create_direct(
         }
     };
 
-    add_participant(
-        &mut transaction,
-        conversation_id,
-        low_id,
-        "member",
-    )
-    .await?;
+    add_participant(&mut transaction, conversation_id, low_id, "member").await?;
 
-    add_participant(
-        &mut transaction,
-        conversation_id,
-        high_id,
-        "member",
-    )
-    .await?;
+    add_participant(&mut transaction, conversation_id, high_id, "member").await?;
 
     transaction.commit().await?;
 
@@ -133,26 +118,14 @@ pub async fn create_group(
     .execute(&mut *transaction)
     .await?;
 
-    add_participant(
-        &mut transaction,
-        conversation_id,
-        created_by,
-        "owner",
-    )
-    .await?;
+    add_participant(&mut transaction, conversation_id, created_by, "owner").await?;
 
     for account_id in participant_ids {
         if *account_id == created_by {
             continue;
         }
 
-        add_participant(
-            &mut transaction,
-            conversation_id,
-            *account_id,
-            "member",
-        )
-        .await?;
+        add_participant(&mut transaction, conversation_id, *account_id, "member").await?;
     }
 
     transaction.commit().await?;

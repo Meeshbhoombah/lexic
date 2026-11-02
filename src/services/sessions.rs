@@ -54,3 +54,22 @@ pub async fn establish(
 
     Ok(SessionResult { session, token })
 }
+
+pub async fn authenticate(
+    db: &PgPool,
+    token: Option<&str>,
+) -> Result<Uuid, AppError> {
+    let token = token
+        .filter(|token| is_valid_token(token))
+        .ok_or(AppError::Unauthorized)?;
+
+    let session = repositories::sessions::find_active(
+        db,
+        &hash_token(token),
+    )
+    .await?;
+
+    session
+        .map(|session| session.account_id)
+        .ok_or(AppError::Unauthorized)
+}

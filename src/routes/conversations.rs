@@ -9,8 +9,7 @@ pub fn router() -> Router<AppState> {
     Router::new()
         .route(
             "/api/v1/conversations",
-            get(controllers::conversations::list)
-                .post(controllers::conversations::create_direct),
+            get(controllers::conversations::list).post(controllers::conversations::create_direct),
         )
         .route(
             "/api/v1/conversations/group",

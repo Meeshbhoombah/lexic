@@ -21,9 +21,5 @@ pub async fn authenticated_account_id(
     state: &AppState,
     headers: &HeaderMap,
 ) -> Result<Uuid, AppError> {
-    services::sessions::authenticate(
-        &state.db,
-        read_session_token(headers),
-    )
-    .await
+    services::sessions::authenticate(&state.db, read_session_token(headers)).await
 }

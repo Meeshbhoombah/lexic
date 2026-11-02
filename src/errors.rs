@@ -22,8 +22,8 @@ impl IntoResponse for AppError {
             ),
             Self::Unauthorized => (
                 StatusCode::UNAUTHORIZED,
-                "invalid_lexe_credential",
-                "The Lexe credential could not be verified.",
+                "unauthorized",
+                "Authentication is required to perform this operation.",
             ),
             Self::Forbidden => (
                 StatusCode::FORBIDDEN,

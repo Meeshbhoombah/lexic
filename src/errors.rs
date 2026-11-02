@@ -8,6 +8,7 @@ use serde_json::json;
 pub enum AppError {
     BadRequest,
     Unauthorized,
+    Forbidden,
     Internal,
 }
 
@@ -24,10 +25,15 @@ impl IntoResponse for AppError {
                 "invalid_lexe_credential",
                 "The Lexe credential could not be verified.",
             ),
+            Self::Forbidden => (
+                StatusCode::FORBIDDEN,
+                "forbidden",
+                "You do not have permission to access this resource.",
+            ),
             Self::Internal => (
                 StatusCode::INTERNAL_SERVER_ERROR,
                 "internal_error",
-                "The account could not be created.",
+                "The request could not be completed.",
             ),
         };
 

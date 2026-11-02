@@ -5,19 +5,13 @@ use uuid::Uuid;
 
 use crate::{
     errors::AppError,
-    models::conversation::{
-        ConversationParticipant,
-        ConversationSummary,
-    },
+    models::conversation::{ConversationParticipant, ConversationSummary},
     repositories::conversations as conversation_repository,
 };
 
 const MAX_GROUP_PARTICIPANTS: usize = 100;
 
-async fn account_is_active(
-    db: &PgPool,
-    account_id: Uuid,
-) -> Result<bool, AppError> {
+async fn account_is_active(db: &PgPool, account_id: Uuid) -> Result<bool, AppError> {
     sqlx::query_scalar::<_, bool>(
         r#"
         SELECT EXISTS (
@@ -47,13 +41,9 @@ pub async fn create_direct(
         return Err(AppError::BadRequest);
     }
 
-    conversation_repository::create_direct(
-        db,
-        authenticated_account_id,
-        other_account_id,
-    )
-    .await
-    .map_err(|_| AppError::Internal)
+    conversation_repository::create_direct(db, authenticated_account_id, other_account_id)
+        .await
+        .map_err(|_| AppError::Internal)
 }
 
 pub async fn create_group(
@@ -81,28 +71,20 @@ pub async fn create_group(
         }
     }
 
-    let participants: Vec<Uuid> =
-        unique_participants.into_iter().collect();
+    let participants: Vec<Uuid> = unique_participants.into_iter().collect();
 
-    conversation_repository::create_group(
-        db,
-        authenticated_account_id,
-        &participants,
-    )
-    .await
-    .map_err(|_| AppError::Internal)
+    conversation_repository::create_group(db, authenticated_account_id, &participants)
+        .await
+        .map_err(|_| AppError::Internal)
 }
 
 pub async fn list_for_account(
     db: &PgPool,
     authenticated_account_id: Uuid,
 ) -> Result<Vec<ConversationSummary>, AppError> {
-    conversation_repository::list_for_account(
-        db,
-        authenticated_account_id,
-    )
-    .await
-    .map_err(|_| AppError::Internal)
+    conversation_repository::list_for_account(db, authenticated_account_id)
+        .await
+        .map_err(|_| AppError::Internal)
 }
 
 pub async fn list_participants(
@@ -130,10 +112,7 @@ pub async fn list_participants(
         return Err(AppError::Forbidden);
     }
 
-    conversation_repository::list_participants(
-        db,
-        conversation_id,
-    )
-    .await
-    .map_err(|_| AppError::Internal)
+    conversation_repository::list_participants(db, conversation_id)
+        .await
+        .map_err(|_| AppError::Internal)
 }

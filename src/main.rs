@@ -67,6 +67,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         .merge(routes::accounts::router())
         .merge(routes::sessions::router())
         .merge(routes::conversations::router())
+        .merge(routes::messages::router())
         .route("/health", axum::routing::get(|| async { "ok" }))
         .with_state(state)
         .layer(cors)

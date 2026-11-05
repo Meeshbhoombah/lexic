@@ -3,10 +3,7 @@ use axum::{
     extract::{Path, Query, State},
     http::HeaderMap,
 };
-use base64::{
-    Engine,
-    engine::general_purpose::URL_SAFE_NO_PAD,
-};
+use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD};
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -75,7 +72,8 @@ impl From<MessageRecord> for MessageResponse {
 impl From<MessagePage> for MessageHistoryResponse {
     fn from(page: MessagePage) -> Self {
         Self {
-            messages: page.messages
+            messages: page
+                .messages
                 .into_iter()
                 .map(MessageResponse::from)
                 .collect(),
@@ -92,8 +90,7 @@ pub async fn create(
     Path(conversation_id): Path<Uuid>,
     Json(request): Json<CreateMessageRequest>,
 ) -> Result<Json<MessageResponse>, AppError> {
-    let account_id =
-        auth::authenticated_account_id(&state, &headers).await?;
+    let account_id = auth::authenticated_account_id(&state, &headers).await?;
 
     let message = services::messages::create(
         &state.db,
@@ -117,8 +114,7 @@ pub async fn list(
     Path(conversation_id): Path<Uuid>,
     Query(query): Query<MessageHistoryQuery>,
 ) -> Result<Json<MessageHistoryResponse>, AppError> {
-    let account_id =
-        auth::authenticated_account_id(&state, &headers).await?;
+    let account_id = auth::authenticated_account_id(&state, &headers).await?;
 
     let page = services::messages::list(
         &state.db,

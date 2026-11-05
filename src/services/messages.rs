@@ -1,15 +1,10 @@
-use base64::{
-    Engine,
-    engine::general_purpose::URL_SAFE_NO_PAD,
-};
+use base64::{Engine, engine::general_purpose::URL_SAFE_NO_PAD};
 use chrono::{DateTime, Utc};
 use sqlx::PgPool;
 use uuid::Uuid;
 
 use crate::{
-    errors::AppError,
-    models::message::MessageRecord,
-    repositories::messages as message_repository,
+    errors::AppError, models::message::MessageRecord, repositories::messages as message_repository,
 };
 
 const MAX_NONCE_BYTES: usize = 256;
@@ -135,18 +130,13 @@ pub async fn list(
         .unwrap_or(DEFAULT_PAGE_SIZE)
         .clamp(1, MAX_PAGE_SIZE);
 
-    let mut messages = message_repository::list_before(
-        db,
-        conversation_id,
-        before,
-        before_id,
-        limit + 1,
-    )
-    .await
-    .map_err(|error| {
-        tracing::error!(error = %error, "Failed to retrieve message history");
-        AppError::Internal
-    })?;
+    let mut messages =
+        message_repository::list_before(db, conversation_id, before, before_id, limit + 1)
+            .await
+            .map_err(|error| {
+                tracing::error!(error = %error, "Failed to retrieve message history");
+                AppError::Internal
+            })?;
 
     let has_more = messages.len() > limit as usize;
 
@@ -158,10 +148,7 @@ pub async fn list(
 
     let (next_before, next_before_id) = if has_more {
         match messages.first() {
-            Some(message) => (
-                Some(message.created_at),
-                Some(message.id),
-            ),
+            Some(message) => (Some(message.created_at), Some(message.id)),
             None => (None, None),
         }
     } else {

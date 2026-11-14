@@ -14,7 +14,9 @@ User navigates to website
 User installs lexic via their Command-Line Interface
 
 ## Features
-- Use email for signup
+- Use phone number for signup, send a OTP for login/verification
+- Can send a message on behalf of the user to an email
+- Can send a message on behalf of the user to a text message 
 - Decentralized accounts with key storage
     + User can have their key stored, saved, within a Node
         * Can be transfered to another Node
